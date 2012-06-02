@@ -20,6 +20,7 @@ class species extends CoreModel {
 		$db->query($query, 'i', array($id));
 		$resultRow = $db->fetchResult();
 		$this->populate($resultRow);
+		error_log(print_r($this, TRUE));
 	}
 	
 }

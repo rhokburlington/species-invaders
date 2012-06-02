@@ -3,6 +3,8 @@
 class api extends CoreController implements ICoreController {
 	
 	const ID = 'id';
+	const NATIVE_LOCATION = 'native_location';
+	const INVADING_LOCATION = 'invading_location';
 	
 	public function __construct() {
 		parent::__construct();
@@ -26,6 +28,12 @@ class api extends CoreController implements ICoreController {
 			case self::ID:
 				$species->getSpeciesByID($paramValue);
 				$result = $species->json();
+				break;
+			case self::NATIVE_LOCATION:
+				$result = json_encode($species->getNativeLocationsBySpeciesID($paramValue));
+				break;
+			case self::INVADING_LOCATION:
+				$result = json_encode($species->getInvadingLocationsBySpeciesID($paramValue));
 				break;
 			case null:
 				$result = json_encode($species->getAllSpecies());

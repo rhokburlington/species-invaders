@@ -2,6 +2,8 @@
 
 class api extends CoreController implements ICoreController {
 	
+	const ID = 'id';
+	
 	public function __construct() {
 		parent::__construct();
 		
@@ -17,10 +19,17 @@ class api extends CoreController implements ICoreController {
 		header('HTTP/1.1 404 Not Found');
 	}
 	
-	public function species_precontroller() {
-		$this->jsonPrecontroller();
+	public function species_precontroller($paramName, $paramValue) {
 		$species = new species();
-		$species->getSpeciesByID(Input::get('id'));
+		switch ($paramName) {
+			case self::ID:
+				$species->getSpeciesByID($paramValue);
+				break;
+			default:
+				header('HTTP/1.1 400 Bad API Request');
+		}
+		
+		$this->jsonPrecontroller();
 		echo $species->json();
 	}
 	

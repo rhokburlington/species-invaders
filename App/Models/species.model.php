@@ -1,6 +1,6 @@
 <?php
 
-class species extends CoreModel {
+class species extends jsonwrapper {
 	
 	protected $speciesid;
 	protected $kingdom;
@@ -14,16 +14,16 @@ class species extends CoreModel {
 	protected $commonNames; //array of common name objects
 	
 	
+	public function __construct() {
+		$this->commonNames = array();
+	}
+	
 	public function getSpeciesByID($id) {
 		$db = DB::instance();
 		$query = 'SELECT * FROM species WHERE speciesid=?';
 		$db->query($query, 'i', array($id));
 		$resultRow = $db->fetchResult();
 		$this->populate($resultRow);
-	}
-	
-	public function json() {
-		return json_encode(get_object_vars($this));
 	}
 	
 }

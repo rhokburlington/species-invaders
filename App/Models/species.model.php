@@ -11,6 +11,8 @@ class species extends jsonwrapper {
 	protected $genus;
 	protected $species;
 	protected $extra_notes;
+	protected $date_added;
+	protected $date_modified;
 	protected $commonNames; //array of common name objects
 	
 	
@@ -24,6 +26,20 @@ class species extends jsonwrapper {
 		$db->query($query, 'i', array($id));
 		$resultRow = $db->fetchResult();
 		$this->populate($resultRow);
+		$commonName = new commonname();
+		$this->commonNames = $commonName->getCommonNameBySpeciesID($this->speciesid);
+	}
+	
+	
+	public function getAllSpecies() {
+		$resultIDs = array();
+		$db = DB::instance();
+		$query = 'SELECT speciesid FROM species';
+		$db->query($query);
+		while ($resultRow = $db->fetchResult()) {
+			$resultIDs[] = $resultRow['speciesid'];
+		}
+		return $resultIDs;
 	}
 	
 }

@@ -25,6 +25,7 @@ class DB {
     private $result;
 
     protected function __construct() {
+    	error_log(Configuration::read('db_host'));
         $this->mysqli = mysqli_init();
         if (!$this->mysqli->real_connect(Configuration::read('db_host'), Configuration::read('db_username'), Configuration::read('db_password'), Configuration::read('db_name'))) {
             throw new MysqliConnectionException('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error());

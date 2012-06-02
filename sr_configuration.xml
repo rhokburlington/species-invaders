@@ -27,16 +27,16 @@
     
     <appconfig>
         <values>
-            <value name="basepath">/sr</value>
+            <value name="basepath">/sr/species-invaders</value>
             <value name="mod_rewrite_enabled">1</value>
             <value name="default_controller">index</value>
         </values>
 
         <database>
-            <host></host>
-            <databasename></databasename>
-            <username></username>
-            <password></password>
+            <host>localhost</host>
+            <databasename>species-invaders</databasename>
+            <username>species-invader</username>
+            <password>rhokburlington</password>
         </database>
     </appconfig>
 

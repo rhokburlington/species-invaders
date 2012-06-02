@@ -28,11 +28,10 @@ Endpoints:
   - /species/id/{id} (returns a single species object)
   - /species/name/{name}
   - /species/common_name/{common_name}
-  - /species/polygon/{polygon}
+  - /species/polygon/{polygon} (find species intersecting with polygon; returns array of species)
   - /species/query/{search query}
-  - /species/locations
-  - /species/info
-  - /species/common_name
+  - /species/native_location/{id} (returns array of spec
+  - /species/invading_location/{id}
 - /location
   - /location/id/{id}
   - /location/polygon/{polygon}

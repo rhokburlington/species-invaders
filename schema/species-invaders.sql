@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2012 at 03:29 PM
+-- Generation Time: Jun 02, 2012 at 05:37 PM
 -- Server version: 5.5.23
 -- PHP Version: 5.3.13
 
@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS `common-names` (
 
 INSERT INTO `common-names` (`speciesid`, `name`) VALUES
 (1, 'Japanese Knotweed'),
-(1, 'American Bamboo');
+(1, 'American Bamboo'),
+(2, 'Zebra Mussel');
 
 -- --------------------------------------------------------
 
@@ -109,28 +110,40 @@ CREATE TABLE IF NOT EXISTS `species` (
   `date_added` datetime NOT NULL,
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`speciesid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `species`
 --
 
 INSERT INTO `species` (`speciesid`, `kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, `extra_notes`, `date_added`, `date_modified`) VALUES
-(1, 'Plantae', '', '', '', '', 'Fallopia', 'japonica', 'This is japanese knotweed!', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 'Plantae', '', '', '', '', 'Fallopia', 'japonica', 'This is japanese knotweed!', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Animalia', 'Mollusca', '', '', '', 'Dreissena', 'polymorpha', '', '2012-06-02 15:53:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `species-locations`
+-- Table structure for table `species-invadinglocations`
 --
 
-CREATE TABLE IF NOT EXISTS `species-locations` (
+CREATE TABLE IF NOT EXISTS `species-invadinglocations` (
+  `speciesid` int(11) NOT NULL,
+  `invading_location` int(11) NOT NULL,
+  KEY `speciesid` (`speciesid`,`invading_location`),
+  KEY `invading_location` (`invading_location`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `species-nativelocations`
+--
+
+CREATE TABLE IF NOT EXISTS `species-nativelocations` (
   `speciesid` int(11) NOT NULL,
   `native_location` int(11) NOT NULL,
-  `invading_location` int(11) NOT NULL,
-  KEY `speciesid` (`speciesid`),
-  KEY `native_location` (`native_location`),
-  KEY `invading_location` (`invading_location`)
+  KEY `speciesid` (`speciesid`,`native_location`),
+  KEY `native_location` (`native_location`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -151,12 +164,18 @@ ALTER TABLE `common-names`
   ADD CONSTRAINT `common@002dnames_ibfk_1` FOREIGN KEY (`speciesid`) REFERENCES `species` (`speciesid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `species-locations`
+-- Constraints for table `species-invadinglocations`
 --
-ALTER TABLE `species-locations`
-  ADD CONSTRAINT `species@002dlocations_ibfk_3` FOREIGN KEY (`invading_location`) REFERENCES `locations` (`locationid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `species@002dlocations_ibfk_1` FOREIGN KEY (`speciesid`) REFERENCES `species` (`speciesid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `species@002dlocations_ibfk_2` FOREIGN KEY (`native_location`) REFERENCES `locations` (`locationid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `species-invadinglocations`
+  ADD CONSTRAINT `species@002dinvadinglocations_ibfk_2` FOREIGN KEY (`invading_location`) REFERENCES `locations` (`locationid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `species@002dinvadinglocations_ibfk_1` FOREIGN KEY (`speciesid`) REFERENCES `species` (`speciesid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `species-nativelocations`
+--
+ALTER TABLE `species-nativelocations`
+  ADD CONSTRAINT `species@002dnativelocations_ibfk_2` FOREIGN KEY (`native_location`) REFERENCES `locations` (`locationid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `species@002dnativelocations_ibfk_1` FOREIGN KEY (`speciesid`) REFERENCES `species` (`speciesid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

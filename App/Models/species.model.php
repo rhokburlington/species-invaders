@@ -18,9 +18,8 @@ class species extends CoreModel {
 		$db = DB::instance();
 		$query = 'SELECT * FROM species WHERE speciesid=?';
 		$db->query($query, 'i', array($id));
-		if ($resultRow = $db->fetchResult()) {
-			$this->populate($resultRow);
-		}
+		$resultRow = $db->fetchResult();
+		$this->populate($resultRow);
 	}
 	
 }

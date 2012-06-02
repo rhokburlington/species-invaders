@@ -1,17 +1,17 @@
 <?php
 
-class species extends CoreModel implements JsonSerializable {
+class species extends CoreModel {
 	
-	public $speciesid;
-	public $kingdom;
-	public $phylum;
-	public $class;
-	public $order;
-	public $family;
-	public $genus;
-	public $species;
-	public $extra_notes;
-	public $commonNames; //array of common name objects
+	protected $speciesid;
+	protected $kingdom;
+	protected $phylum;
+	protected $class;
+	protected $order;
+	protected $family;
+	protected $genus;
+	protected $species;
+	protected $extra_notes;
+	protected $commonNames; //array of common name objects
 	
 	
 	public function getSpeciesByID($id) {
@@ -22,9 +22,8 @@ class species extends CoreModel implements JsonSerializable {
 		$this->populate($resultRow);
 	}
 	
-	
-	public function jsonSerialize() {
-		return get_object_vars($this);
+	public function json() {
+		return json_encode(get_object_vars($this));
 	}
 	
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2012 at 01:16 PM
+-- Generation Time: Jun 02, 2012 at 03:29 PM
 -- Server version: 5.5.23
 -- PHP Version: 5.3.13
 
@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS `activities` (
   `activityid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `extra_notes` text NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`activityid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -58,6 +60,14 @@ CREATE TABLE IF NOT EXISTS `common-names` (
   KEY `speciesid` (`speciesid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `common-names`
+--
+
+INSERT INTO `common-names` (`speciesid`, `name`) VALUES
+(1, 'Japanese Knotweed'),
+(1, 'American Bamboo');
+
 -- --------------------------------------------------------
 
 --
@@ -68,8 +78,17 @@ CREATE TABLE IF NOT EXISTS `locations` (
   `locationid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `polygon` polygon NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`locationid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`locationid`, `name`, `polygon`, `date_added`, `date_modified`) VALUES
+(1, 'Burlington Triangle', '\0\0\0\0\0\0\0\0\0\0\0\0\0;ŒI/MRÀ¥/„œ÷+F@½:Ç€ìDRÀÊI»ÑEF@\Z¢\n†PRÀ''÷;KF@;ŒI/MRÀ¥/„œ÷+F@', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -87,8 +106,17 @@ CREATE TABLE IF NOT EXISTS `species` (
   `genus` varchar(100) NOT NULL,
   `species` varchar(100) NOT NULL,
   `extra_notes` text NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`speciesid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `species`
+--
+
+INSERT INTO `species` (`speciesid`, `kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, `extra_notes`, `date_added`, `date_modified`) VALUES
+(1, 'Plantae', '', '', '', '', 'Fallopia', 'japonica', 'This is japanese knotweed!', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 

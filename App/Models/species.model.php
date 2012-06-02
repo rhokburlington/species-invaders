@@ -42,6 +42,29 @@ class species extends jsonwrapper {
 		return $resultIDs;
 	}
 	
+	public function getInvadingLocationsBySpeciesID($speciesid) {
+		$resultIDs = array();
+		$db = DB::instance();
+		$query = 'SELECT invading_location FROM `species-invadinglocations` WHERE speciesid=?';
+		$db->query($query, 'i', array($speciesid));
+		while ($resultRow = $db->fetchResult()) {
+			$resultIDs[] = $resultRow['invading_location'];
+		}
+		return $resultIDs;
+	}
+	
+	
+	public function getNativeLocationsBySpeciesID($speciesid) {
+		$resultIDs = array();
+		$db = DB::instance();
+		$query = 'SELECT native_location FROM `species-nativelocations` WHERE speciesid=?';
+		$db->query($query, 'i', array($speciesid));
+		while ($resultRow = $db->fetchResult()) {
+			$resultIDs[] = $resultRow['native_location'];
+		}
+		return $resultIDs;
+	}
+	
 }
 
 ?>

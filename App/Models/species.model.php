@@ -2,16 +2,16 @@
 
 class species extends CoreModel implements JsonSerializable {
 	
-	protected $speciesid;
-	protected $kingdom;
-	protected $phylum;
-	protected $class;
-	protected $order;
-	protected $family;
-	protected $genus;
-	protected $species;
-	protected $extra_notes;
-	protected $commonNames; //array of common name objects
+	public $speciesid;
+	public $kingdom;
+	public $phylum;
+	public $class;
+	public $order;
+	public $family;
+	public $genus;
+	public $species;
+	public $extra_notes;
+	public $commonNames; //array of common name objects
 	
 	
 	public function getSpeciesByID($id) {

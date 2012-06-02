@@ -26,6 +26,17 @@ class species extends jsonwrapper {
 		$this->populate($resultRow);
 	}
 	
+	
+	public function getAllSpecies() {
+		$resultIDs = array();
+		$db = DB::instance();
+		$query = 'SELECT speciesid FROM species';
+		while ($resultRow = $db->fetchResult()) {
+			$resultIDs[] = $resultRow['speciesid'];
+		}
+		return $resultIDs;
+	}
+	
 }
 
 ?>

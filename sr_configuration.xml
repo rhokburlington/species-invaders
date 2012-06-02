@@ -27,7 +27,7 @@
     
     <appconfig>
         <values>
-            <value name="basepath">/sr/species-invaders</value>
+            <value name="basepath">/si/species-invaders</value>
             <value name="mod_rewrite_enabled">1</value>
             <value name="default_controller">index</value>
         </values>

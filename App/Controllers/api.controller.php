@@ -19,7 +19,9 @@ class api extends CoreController implements ICoreController {
 	
 	public function species_precontroller() {
 		$this->jsonPrecontroller();
-		echo 'this is the species json';
+		$species = new species();
+		$species->getSpeciesByID(Input::get('id'));
+		echo json_encode($species);
 	}
 	
 }

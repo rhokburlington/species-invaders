@@ -29,7 +29,7 @@ class Input {
         }
         $get = $_GET[$index];
         if ($sanitize) {
-            $get = self::sanitize($post);
+            $get = self::sanitize($get);
         }
         return $get;
     }

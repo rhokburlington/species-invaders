@@ -44,7 +44,8 @@ class api extends CoreController implements ICoreController {
 		$result = null;
 		switch ($paramName) {
 			case self::ID:
-// 				$location->
+				$location->getLocationByID($paramValue);
+				$result = $location->json();
 				break;
 			case null:
 				$result = json_encode($location->getAllLocations());

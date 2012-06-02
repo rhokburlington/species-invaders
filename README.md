@@ -24,27 +24,25 @@ Fetch data via GET & create/update data via POST. Querying specific data from an
 
 Endpoints:
 
-- /species
-  - Optional parameters:
-    - id (species id)
-    - name (species)
-    - common_name
-    - polygon
-    - q (search query)
+- /species (returns array of species IDs)
+  - /species/id/{id} (returns a single species object)
+  - /species/name/{name}
+  - /species/common_name/{common_name}
+  - /species/polygon/{polygon}
+  - /species/query/{search query}
   - /species/locations
   - /species/info
   - /species/common_name
 - /location
-  - Optional parameters:
-    - id (location id)
-    - polygon
+  - /location/id/{id}
+  - /location/polygon/{polygon}
 - /activity
-  - Optional parameters:
-    - id (activity id)
-    - name
-    - q (search query)
+  - /activity/id/{id}
+  - /activity/name/{name}
+  - /activity/query/{search query}
 
 IMPLEMENTATION CONSIDERATIONS
 -----------------------------
 
-We're developing in PHP and intend to use the [Wikipedia API](http://www.mediawiki.org/wiki/API) & [Google Maps API](https://developers.google.com/maps/documentation/), fortunately MySQL supports [geometry functions](http://dev.mysql.com/doc/refman/4.1/en/geometry-property-functions.html) so we can store/process our polygons natively there.
+We're developing in PHP and intend to use the [Wikipedia API](http://www.mediawiki.org/wiki/API) & [Google Maps API](https://developers.google.com/maps/documentation/), fortunately MySQL supports [geometry functions](http://dev.mysql.com/doc/refman/4.1/en/geometry-property-functions.html) so we can store/process our polygons natively there. We started with Scott Markoski's [Silent Running](https://github.com/smarkoski/sr-framework) framework due to familiarity for implementation speed.
+

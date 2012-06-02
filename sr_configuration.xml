@@ -33,7 +33,7 @@
         </values>
 
         <database>
-            <host>localhost</host>
+            <host>192.168.0.50</host>
             <databasename>species-invaders</databasename>
             <username>species-invader</username>
             <password>rhokburlington</password>

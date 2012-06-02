@@ -30,6 +30,7 @@
             <value name="basepath">/si</value>
             <value name="mod_rewrite_enabled">1</value>
             <value name="default_controller">index</value>
+            <value name="sessions_enabled">1</value>
         </values>
 
         <database>

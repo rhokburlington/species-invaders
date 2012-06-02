@@ -1,6 +1,6 @@
 <?php
 
-class species extends CoreModel {
+class species extends CoreModel implements JsonSerializable {
 	
 	protected $speciesid;
 	protected $kingdom;
@@ -20,7 +20,11 @@ class species extends CoreModel {
 		$db->query($query, 'i', array($id));
 		$resultRow = $db->fetchResult();
 		$this->populate($resultRow);
-		error_log(print_r($this, TRUE));
+	}
+	
+	
+	public function jsonSerialize() {
+		return get_object_vars($this);
 	}
 	
 }

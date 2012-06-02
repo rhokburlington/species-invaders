@@ -32,7 +32,7 @@ Endpoints:
   - /species/query/{search query}
   - /species/native_location/{id} (returns array of spec
   - /species/invading_location/{id}
-- /location
+- /locations
   - /location/id/{id}
   - /location/polygon/{polygon}
 - /activity

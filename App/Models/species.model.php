@@ -31,6 +31,7 @@ class species extends jsonwrapper {
 		$resultIDs = array();
 		$db = DB::instance();
 		$query = 'SELECT speciesid FROM species';
+		$db->query($query);
 		while ($resultRow = $db->fetchResult()) {
 			$resultIDs[] = $resultRow['speciesid'];
 		}

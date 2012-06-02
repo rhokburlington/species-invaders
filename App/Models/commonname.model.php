@@ -9,7 +9,7 @@ class commonname extends jsonwrapper {
 	public function getCommonNameBySpeciesID($speciesid) {
 		$resultNames = array();
 		$db = DB::instance();
-		$query = 'SELECT * FROM common-names WHERE speciesid=?';
+		$query = 'SELECT * FROM `common-names` WHERE speciesid=?';
 		$db->query($query, 'i', array($speciesid));
 		while ($resultRow = $db->fetchResult()) {
 			$commonName = new commonname();

@@ -24,6 +24,8 @@ class species extends jsonwrapper {
 		$db->query($query, 'i', array($id));
 		$resultRow = $db->fetchResult();
 		$this->populate($resultRow);
+		$commonName = new commonname();
+		$this->commonNames = $commonName->getCommonNameBySpeciesID($this->speciesid);
 	}
 	
 	

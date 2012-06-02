@@ -46,3 +46,8 @@ IMPLEMENTATION CONSIDERATIONS
 
 We're developing in PHP and intend to use the [Wikipedia API](http://www.mediawiki.org/wiki/API) & [Google Maps API](https://developers.google.com/maps/documentation/), fortunately MySQL supports [geometry functions](http://dev.mysql.com/doc/refman/4.1/en/geometry-property-functions.html) so we can store/process our polygons natively there. We started with Scott Markoski's [Silent Running](https://github.com/smarkoski/sr-framework) framework due to familiarity for implementation speed.
 
+### Example Invasive Species
+
+* [Ash Borer](http://en.wikipedia.org/wiki/Ash_Borer)
+* [Watermilfoil](http://en.wikipedia.org/wiki/Watermilfoil)
+* [Japanese Knotweed](http://en.wikipedia.org/wiki/Japanese_knot_weed)

@@ -11,6 +11,8 @@ class species extends jsonwrapper {
 	protected $genus;
 	protected $species;
 	protected $extra_notes;
+	protected $date_added;
+	protected $date_modified;
 	protected $commonNames; //array of common name objects
 	
 	

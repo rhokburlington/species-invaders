@@ -19,7 +19,7 @@ class jsonwrapper extends CoreModel {
 				$objvar = $objvar->toArray();
 			}
 		}
-		return $objVars;
+		return $objectVars;
 	}
 	
 }

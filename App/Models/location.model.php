@@ -33,7 +33,7 @@ class location extends jsonwrapper {
 	public function insertNewLocation($name, $polygon) {
 		try {
 			$db = DB::instance();
-			$query = 'INSERT INTO locations (name, polygon) VALUES (?, PolyFromText("POLYGON(('.$this->formatPolygon($polygon).'))"))';
+			$query = 'INSERT INTO locations (name, polygon, date_added) VALUES (?, PolyFromText("POLYGON(('.$this->formatPolygon($polygon).'))"), NOW())';
 			$db->query($query, 's', array($name));
 		} catch (Exception $e) {
 			return FALSE;

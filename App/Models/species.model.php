@@ -65,6 +65,19 @@ class species extends jsonwrapper {
 		return $resultIDs;
 	}
 	
+	
+	public function insertNewSpecies($kingdom, $phylum, $class, $order, $family, $genus, $species, $extraNotes) {
+		$db = DB::instance();
+		$query = 'INSERT INTO species (kingdom, phylum, class, order, family, genus, species, extra_notes, date_added VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())';
+		$db->query($query, 's,s,s,s,s,s,s', array($kingdom, $phylum, $class, $order, $family, $genus, $species, $extraNotes));
+	}
+	
+	public function associateSpeciesWithInvadingLocation($speciesid, $locationid) {
+		$db = DB::instance();
+		$query = 'INSERT INTO `species-invadinglocations` (speciesid, locationid) VALUES (?, ?)';
+		$db->query($query, 'i,i', array($speciesid, $locationid));
+	}
+	
 }
 
 ?>

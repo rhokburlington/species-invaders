@@ -33,10 +33,25 @@ class api extends CoreController implements ICoreController {
 				$result = json_encode($species->getNativeLocationsBySpeciesID($paramValue));
 				break;
 			case self::INVADING_LOCATION:
-				$result = json_encode($species->getInvadingLocationsBySpeciesID($paramValue));
+				try {
+					$result = json_encode($species->associatedSpeciesWithInvadingLocation(Input::post('speciesid'), Input::post('locationid')));	
+				} catch (InputIOException $e) {
+					$result = json_encode($species->getInvadingLocationsBySpeciesID($paramValue));
+				}
 				break;
 			case null:
-				$result = json_encode($species->getAllSpecies());
+				try {
+					$result = json_encode($species->insertNewSpecies(Input::post('kingdom'), 
+																	Input::post('phylum'),
+																	Input::post('class'),
+																	Input::post('order'),
+																	Input::post('family'),
+																	Input::post('genus'),
+																	Input::post('species'),
+																	Input::post('extra_notes')));
+				} catch (InputIOException $e) {
+					$result = json_encode($species->getAllSpecies());
+				}
 				break;
 			default:
 				header('HTTP/1.1 400 Bad API Request');

@@ -15,7 +15,7 @@ Proposed use-cases for apps/sites/widgets which would use this API:
 - "This place has something invasive, others should be aware!"
 - The ability to administer the data sets
 
-We'll be developing a RESTful API in PHP, initially responding w/JSON data, and hopefully a proof-of-concept JavaScript widget.
+We've developed a RESTful API in PHP, initially responding w/JSON data, and a proof-of-concept JavaScript widget. View further [solution details at RHoK](http://www.rhok.org/solutions/species-invaders-api) and the [presentation at Speaker Deck](https://speakerdeck.com/u/morgant/p/species-invaders).
 
 API SCHEMA
 ----------

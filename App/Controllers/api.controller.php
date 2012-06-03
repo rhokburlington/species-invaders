@@ -56,7 +56,12 @@ class api extends CoreController implements ICoreController {
 				$result = $location->json();
 				break;
 			case null:
-				$result = json_encode($location->getAllLocations());
+				try {
+					$location->formatPolygon(Input::post('polygon'));
+					$result = json_encode($location->insertNewLocation(Input::post('name'), Input::post('polygon')));
+				} catch (InputIOException $e) {
+					$result = json_encode($location->getAllLocations());
+				}
 				break;
 			default:
 				header('HTTP/1.1 400 Bad API Request');

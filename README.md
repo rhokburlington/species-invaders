@@ -45,8 +45,9 @@ POST Endpoints:
 - /species (add a new species)
   - /species/id/{id} (update species by id)
   - /species/name/{name} (update species by name )
-  - /species/native_location/{id} (add/remove a native location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
-  - /species/invading_location/{id} (add/remove an invading location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
+  - /species/common_name (add common name; paramers: 'speciesid' [required], 'common_name' [required])
+  - /species/native_location/ (add/remove a native location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
+  - /species/invading_location/ (add/remove an invading location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
 - /locations (add a new location; parameters: 'name' [optional] & 'polygon' [required])
   - /locations/id/{id} (update a location; parameters: 'id' [required], 'name' [optional], 'polygon' [required])
 - /activity

@@ -20,7 +20,7 @@ We've developed a RESTful API in PHP, initially responding w/JSON data, and a pr
 API SCHEMA
 ----------
 
-Fetch data via GET & create/update data via POST. Querying specific data from an endpoint can be done by including appropriate query string parameters. Returns JSON, possibly JSON-P if a callback is specified in the query string.
+Fetch data via GET & create/update data via POST. Querying specific data from an endpoint can be done by including appropriate URL parameters. Returns JSON, possibly JSON-P if a callback is specified in the query string. Uses appropriate HTTP response codes (200 for success, 400 for bad requests, 404 for request not found, 500 for internal server errors, etc.)
 
 ### GET Endpoints:
 
@@ -29,7 +29,7 @@ Fetch data via GET & create/update data via POST. Querying specific data from an
   - /species/name/{name} (returns a single species object by species)**
   - /species/common_name/{common_name} (returns a single species object by common name)**
   - /species/polygon/{polygon} (find species intersecting with polygon; returns array of species ids)**
-  - /species/query/{search query} (find species by partial string match, specifically kindom..species & common names; returns an array of species ids)*
+  - /species/search/{search query} (find species by partial string match, specifically kindom..species & common names; returns an array of species ids)*
   - /species/native_locations/{id} (returns array of native location ids for a species by id)*
   - /species/invading_locations/{id} (returns array of invading location ids for a species by id)*
 - /locations (returns array of all location IDs)*
@@ -38,7 +38,7 @@ Fetch data via GET & create/update data via POST. Querying specific data from an
 - /activity (return an array of all activity ids)**
   - /activity/id/{id} (return a single activity object by id)**
   - /activity/name/{name} (return a single activity object by name)**
-  - /activity/query/{search query} (return an array of activity ids by partial string match against name & extra_info)**
+  - /activity/search/{search query} (return an array of activity ids by partial string match against name & extra_info)**
 
 ### POST Endpoints:
 

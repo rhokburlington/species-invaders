@@ -30,7 +30,11 @@ class api extends CoreController implements ICoreController {
 				$result = $species->json();
 				break;
 			case self::NATIVE_LOCATION:
-				$result = json_encode($species->getNativeLocationsBySpeciesID($paramValue));
+				try {
+					$result = json_encode($species->associateSpeciesWithNativeLocation(Input::post('speciesid'), Input::post('locationid')));
+				} catch (InputIOException $e) {
+					$result = json_encode($species->getNativeLocationsBySpeciesID($paramValue));
+				}
 				break;
 			case self::INVADING_LOCATION:
 				try {

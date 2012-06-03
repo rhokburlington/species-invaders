@@ -78,6 +78,12 @@ class species extends jsonwrapper {
 		$db->query($query, 'i,i', array($speciesid, $locationid));
 	}
 	
+	public function associateSpeciesWithNativeLocation($speciesid, $locationid) {
+		$db = DB::instance();
+		$query = 'INSERT INTO `species-nativelocations` (speciesid, native_location) VALUES (?, ?)';
+		$db->query($query, 'i,i', array($speciesid, $locationid));
+	}
+	
 }
 
 ?>

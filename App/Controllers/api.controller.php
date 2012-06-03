@@ -3,8 +3,8 @@
 class api extends CoreController implements ICoreController {
 	
 	const ID = 'id';
-	const NATIVE_LOCATION = 'native_location';
-	const INVADING_LOCATION = 'invading_location';
+	const NATIVE_LOCATION = 'native_locations';
+	const INVADING_LOCATION = 'invading_locations';
 	const COMMON_NAME = 'common_name';
 	const SEARCH = 'search';
 	
@@ -79,8 +79,12 @@ class api extends CoreController implements ICoreController {
 		$result = null;
 		switch ($paramName) {
 			case self::ID:
-				$location->getLocationByID($paramValue);
-				$result = $location->json();
+				try {
+					$result = json_encode($location->updateLocation(Input::post('locationid'), Input::post('name'), Input::post('polygon')));
+				} catch (InputIOException $e) {
+					$location->getLocationByID($paramValue);
+					$result = $location->json();
+				}
 				break;
 			case null:
 				try {

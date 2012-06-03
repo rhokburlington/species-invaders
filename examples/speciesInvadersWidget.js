@@ -120,6 +120,18 @@ function map_location(species, location, isInvasive) {
 	
 	// add it to the map
 	polygon.setMap(map);
+	
+	// find the center of the polygon & put the species label there
+	var bounds = new google.maps.LatLngBounds();
+	for (index in polygonPoints) {
+		bounds.extend(polygonPoints[index]);
+	}
+	console.log(bounds.getCenter);
+	var marker = new google.maps.Marker({
+      position: bounds.getCenter(),
+      map: map,
+      title: species.species
+  });
 }
 
 function select_special() {

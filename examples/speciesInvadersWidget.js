@@ -1,5 +1,8 @@
 var species_invaders_api = 'http://silentrunning.info/si/api/';
 var map = null;
+var polygons = new Array(0);
+var markers = new Array(0);
+var infoWindows = new Array(0);
 
 $(document).ready(function () {
 	// load google maps
@@ -21,17 +24,17 @@ function google_maps_init() {
 	};
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 	
-	show_all_species();
+	show_all_species(true);
 }
 
-function show_all_species() {
+function show_all_species(addToSelect) {
 	// get all species
 	$.ajax({
 		url: species_invaders_api + 'species',
 		success: function(data) {
 			// get each species and add its locations to the map
 			for ( index in data ) {
-				show_species(data[index], true);
+				show_species(data[index], addToSelect);
 			}
 		}
 	});
@@ -62,10 +65,10 @@ function show_species(id, addToSelect) {
 					for ( index in nativeLocationsData )
 					{
 						// get the native locations polygons
-						$.aja({
+						$.ajax({
 							url: species_invaders_api + 'locations/id/' + nativeLocationsData[index],
 							success: function (locationData) {
-								console.log('location: ' + locationData)
+								map_location(speciesData, locationData, false);
 							}
 						});
 					}
@@ -109,7 +112,7 @@ function map_location(species, location, isInvasive) {
 	for ( index in location.polygon ) {
 		polygonPoints.push(new google.maps.LatLng(location.polygon[index][1], location.polygon[index][0]));
 	}
-	polygon = new google.maps.Polygon({
+	var polygon = new google.maps.Polygon({
 		paths: polygonPoints,
 		strokeColor: strokeColor,
 		strokeOpacity: 0.8,
@@ -117,6 +120,7 @@ function map_location(species, location, isInvasive) {
 		fillColor: fillColor,
 		fillOpacity: 0.35
 	});
+	polygons.push(polygon);
 	
 	// add it to the map
 	polygon.setMap(map);
@@ -126,14 +130,58 @@ function map_location(species, location, isInvasive) {
 	for (index in polygonPoints) {
 		bounds.extend(polygonPoints[index]);
 	}
-	console.log(bounds.getCenter);
+	//console.log(bounds.getCenter);
 	var marker = new google.maps.Marker({
       position: bounds.getCenter(),
       map: map,
       title: species.species
-  });
+	});
+	markers.push(marker);
+	
+	// fill in the info window
+	var contentString = '<h3>' + species.species + ' ' + species.family + '</h2>';
+	contentString += '<h4>Common Names</h3><p>';
+	for ( index in species.commonNames ) {
+		contentString += species.commonNames[index].name;
+		if ( ( species.commonNames.length > 1 ) && ( index < species.commonNames.length - 1 ) ) {
+			contentString += ', ';
+		}
+	}
+	contentString += '</p>';
+	var info = new google.maps.InfoWindow({content: contentString});
+	infoWindows.push(info);
+	
+	google.maps.event.addListener(marker, 'click', function() {
+		console.log('marker: ', marker);
+		console.log('info: ', info);
+		info.open(map, marker);
+	});
 }
 
 function select_special() {
-	show_species($('#species option:selected').val(), false);
+	clear_map();
+	species = $('#species option:selected').val();
+	if ( species === 'ALL' ) {
+		show_all_species(false);
+	} else {
+		show_species(species, false);
+	}
+}
+
+function clear_map() {
+	// clear all info windows
+	for (index in infoWindows) {
+		//infoWindows[index].setMap(null);
+	}
+	infoWindows = new Array(0);
+	// clear all the markers
+	for (index in markers) {
+		markers[index].setMap(null);
+	}
+	markers = new Array(0);
+	// clear all polygons
+	for (index in polygons) {
+		polygons[index].setMap(null);
+	}
+	polygons = new Array(0);
 }

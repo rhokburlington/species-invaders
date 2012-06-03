@@ -22,7 +22,7 @@ API SCHEMA
 
 Fetch data via GET & create/update data via POST. Querying specific data from an endpoint can be done by including appropriate query string parameters. Returns JSON, possibly JSON-P if a callback is specified in the query string.
 
-Endpoints:
+GET Endpoints:
 
 - /species (returns array of species IDs)
   - /species/id/{id} (returns a single species object)
@@ -33,12 +33,25 @@ Endpoints:
   - /species/native_location/{id} (returns array of spec
   - /species/invading_location/{id}
 - /locations
-  - /location/id/{id}
-  - /location/polygon/{polygon}
+  - /locations/id/{id}
+  - /locations/polygon/{polygon}
 - /activity
   - /activity/id/{id}
   - /activity/name/{name}
   - /activity/query/{search query}
+
+POST Endpoints:
+
+- /species (add a new species)
+  - /species/id/{id} (update species by id)
+  - /species/name/{name} (update species by name )
+  - /species/native_location/{id} (add/remove a native location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
+  - /species/invading_location/{id} (add/remove an invading location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
+- /locations (add a new location; parameters: 'name' [optional] & 'polygon' [required])
+  - /locations/id/{id} (update a location; parameters: 'id' [required], 'name' [optional], 'polygon' [required])
+- /activity
+  - /activity/id/{id}
+  - /activity/name/{name}
 
 IMPLEMENTATION CONSIDERATIONS
 -----------------------------

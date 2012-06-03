@@ -79,8 +79,12 @@ class api extends CoreController implements ICoreController {
 		$result = null;
 		switch ($paramName) {
 			case self::ID:
-				$location->getLocationByID($paramValue);
-				$result = $location->json();
+				try {
+					$result = json_encode($location->updateLocation(Input::post('locationid'), Input::post('name'), Input::post('polygon')));
+				} catch (InputIOException $e) {
+					$location->getLocationByID($paramValue);
+					$result = $location->json();
+				}
 				break;
 			case null:
 				try {

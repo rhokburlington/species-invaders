@@ -67,3 +67,57 @@ We're developing in PHP and intend to use the [Wikipedia API](http://www.mediawi
 * [Ash Borer](http://en.wikipedia.org/wiki/Ash_Borer)
 * [Watermilfoil](http://en.wikipedia.org/wiki/Watermilfoil)
 * [Japanese Knotweed](http://en.wikipedia.org/wiki/Japanese_knot_weed)
+
+ROADMAP
+-------
+
+### Alpha Release
+
+* We are here. Core API mostly implemented, plus an example widget that talks to the API.
+
+### Beta Release
+
+#### API:
+
+* Feature Complete GET & POST endpoints
+* Better common name management
+* Return Wikipedia data/links
+* Support for polygon merging
+* Pending/Approved status for species, location, and activity data
+* Require specific auth privileges to edit species, location, and activity data
+* OAUTH for authentication for POST
+
+#### Widget:
+
+* Icons for kingdom/phylum of species
+* Query species by viewport
+* Support for activities
+
+### v1.0
+
+#### API:
+
+Any additional features?
+
+#### Web Admin Interface:
+
+A web administration interface for managing the data, API authentication, etc.
+
+#### Widget:
+
+Developed into something easily embedded in an environmental action group or outdoor activities website w/basic config & theming options
+
+#### Mobile Web App:
+
+A mobile web app, built on the full feature set of the API that allows individuals (amateur or professionals) to search for invasive species information by:
+
+  * Activity that they'd like to partake in (e.g. camping, fishing, swimming, gardening, etc.)
+  * Traveling from point A to point B
+  * A current location
+  * A plant/animal that they've spotted
+
+Also, the ability to post locations (both native & invading) and species from anywhere.
+
+#### Other Partners:
+
+Any other partners: web, desktop, and mobile app developers; professionals; scientific researchers; environmental activism organizations.

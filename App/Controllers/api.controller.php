@@ -57,6 +57,7 @@ class api extends CoreController implements ICoreController {
 				break;
 			case null:
 				try {
+					error_log(print_r($_POST, TRUE));
 					$location->formatPolygon(Input::post('polygon'));
 					$result = json_encode($location->insertNewLocation(Input::post('name'), Input::post('polygon')));
 				} catch (InputIOException $e) {

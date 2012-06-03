@@ -6,6 +6,7 @@ class api extends CoreController implements ICoreController {
 	const NATIVE_LOCATION = 'native_location';
 	const INVADING_LOCATION = 'invading_location';
 	const COMMON_NAME = 'common_name';
+	const SEARCH = 'search';
 	
 	public function __construct() {
 		parent::__construct();
@@ -46,6 +47,9 @@ class api extends CoreController implements ICoreController {
 				break;
 			case self::COMMON_NAME:
 				$result = json_encode($species->addCommonName(Input::post('speciesid'), Input::post('common_name')));
+				break;
+			case self::SEARCH:
+				$result = json_encode($species->search(urldecode($paramValue)));
 				break;
 			case null:
 				try {

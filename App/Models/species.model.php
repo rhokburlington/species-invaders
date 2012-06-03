@@ -110,6 +110,29 @@ class species extends jsonwrapper {
 		return TRUE;
 	}
 	
+	
+	public function search($queryString) {
+		$db = DB::instance();
+		$queryString = '%'.$queryString.'%';
+		$query = 'SELECT species.speciesid AS id
+					FROM `species`
+					LEFT JOIN `common-names` ON species.speciesid = `common-names`.speciesid
+					WHERE `kingdom` LIKE ?
+					OR `phylum` LIKE ?
+					OR `class` LIKE ?
+					OR `order` LIKE ?
+					OR `family` LIKE ?
+					OR `genus` LIKE ?
+					OR `species` LIKE ?
+					OR `common-names`.name LIKE ?';
+		$db->query($query, 's,s,s,s,s,s,s,s', array($queryString,$queryString,$queryString,$queryString,$queryString,$queryString,$queryString,$queryString));
+		$resultIDs = array();
+		while ($resultRow = $db->fetchResult()) {
+			$resultIDs[] = $resultRow['id'];
+		}
+		return $resultIDs;
+	}
+	
 }
 
 ?>

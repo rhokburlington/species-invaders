@@ -22,37 +22,40 @@ API SCHEMA
 
 Fetch data via GET & create/update data via POST. Querying specific data from an endpoint can be done by including appropriate query string parameters. Returns JSON, possibly JSON-P if a callback is specified in the query string.
 
-GET Endpoints:
+### GET Endpoints:
 
-- /species (returns array of species IDs)
-  - /species/id/{id} (returns a single species object)
-  - /species/name/{name}
-  - /species/common_name/{common_name}
-  - /species/polygon/{polygon} (find species intersecting with polygon; returns array of species)
-  - /species/query/{search query}
-  - /species/native_location/{id} (returns array of spec
-  - /species/invading_location/{id}
-- /locations
-  - /locations/id/{id}
-  - /locations/polygon/{polygon}
-- /activity
-  - /activity/id/{id}
-  - /activity/name/{name}
-  - /activity/query/{search query}
+- /species (returns array of all species IDs)*
+  - /species/id/{id} (returns a single species object by id)*
+  - /species/name/{name} (returns a single species object by species)**
+  - /species/common_name/{common_name} (returns a single species object by common name)**
+  - /species/polygon/{polygon} (find species intersecting with polygon; returns array of species ids)**
+  - /species/query/{search query} (find species by partial string match, specifically kindom..species & common names; returns an array of species ids)*
+  - /species/native_locations/{id} (returns array of native location ids for a species by id)*
+  - /species/invading_locations/{id} (returns array of invading location ids for a species by id)*
+- /locations (returns array of all location IDs)*
+  - /locations/id/{id} (returns a single location object by id)*
+  - /locations/polygon/{polygon} (find locations intersecting with polygon; returns array of location ids)**
+- /activity (return an array of all activity ids)**
+  - /activity/id/{id} (return a single activity object by id)**
+  - /activity/name/{name} (return a single activity object by name)**
+  - /activity/query/{search query} (return an array of activity ids by partial string match against name & extra_info)**
 
-POST Endpoints:
+### POST Endpoints:
 
-- /species (add a new species)
-  - /species/id/{id} (update species by id)
-  - /species/name/{name} (update species by name )
-  - /species/common_name (add common name; paramers: 'speciesid' [required], 'common_name' [required])
-  - /species/native_location/ (add/remove a native location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
-  - /species/invading_location/ (add/remove an invading location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])
-- /locations (add a new location; parameters: 'name' [optional] & 'polygon' [required])
-  - /locations/id/{id} (update a location; parameters: 'id' [required], 'name' [optional], 'polygon' [required])
-- /activity
-  - /activity/id/{id}
-  - /activity/name/{name}
+- /species (add a new species; parameters 'kingdom'..'species', 'extra_notes'])* 
+  - /species/id (update species by id; parameters: 'id' [required], 'kingdom'..'species', 'extra_notes')**
+  - /species/name{name} (update species by name; parameters: 'id' [required], 'kingdom'..'species', 'extra_notes')**
+  - /species/common_name (add common name; parameters: 'speciesid' [required], 'common_name' [required])**
+  - /species/native_location/ (associate/disassociate a native location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])**†
+  - /species/invading_location/ (associate/disassociate an invading location; parameters: 'speciesid' [required], 'locationid' [required], 'action' [required; values: 'add' or 'delete'])**†
+- /locations (add a new location; parameters: 'name' [optional] & 'polygon' [required])*
+  - /locations/id (update/remove a location by id; parameters: 'locationid' [required], 'name' [optional], 'polygon' [required])*
+- /activity (add a new activity; parameters: 'name' [required], 'extra_info' [optional])**
+  - /activity/id (update/remove an activity by id; parameters: 'activityid' [required], 'name' [required], 'extra_info' [optional])**
+
+* - Completed
+** - Unimplemented or Incomplete
+† - 'add/associate' support only.
 
 IMPLEMENTATION CONSIDERATIONS
 -----------------------------

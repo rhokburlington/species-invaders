@@ -58,7 +58,7 @@ function show_species(id, addToSelect) {
 			
 			// get the native locations
 			$.ajax({
-				url: species_invaders_api + 'species/native_location/' + speciesData.speciesid,
+				url: species_invaders_api + 'species/native_locations/' + speciesData.speciesid,
 				success: function (nativeLocationsData) {
 					console.log('native locations: ' + nativeLocationsData);
 					// step through the native locations
@@ -77,7 +77,7 @@ function show_species(id, addToSelect) {
 			
 			// get the invading locations
 			$.ajax({
-				url: species_invaders_api + 'species/invading_location/' + speciesData.speciesid,
+				url: species_invaders_api + 'species/invading_locations/' + speciesData.speciesid,
 				success: function (invadingLocationsData) {
 					console.log('invading locations: ' + invadingLocationsData);
 					// step through the invading locations

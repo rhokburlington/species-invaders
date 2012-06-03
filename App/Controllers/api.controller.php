@@ -5,6 +5,7 @@ class api extends CoreController implements ICoreController {
 	const ID = 'id';
 	const NATIVE_LOCATION = 'native_location';
 	const INVADING_LOCATION = 'invading_location';
+	const COMMON_NAME = 'common_name';
 	
 	public function __construct() {
 		parent::__construct();
@@ -42,6 +43,9 @@ class api extends CoreController implements ICoreController {
 				} catch (InputIOException $e) {
 					$result = json_encode($species->getInvadingLocationsBySpeciesID($paramValue));
 				}
+				break;
+			case self::COMMON_NAME:
+				$result = json_encode($species->addCommonName(Input::post('speciesid'), Input::post('common_name')));
 				break;
 			case null:
 				try {

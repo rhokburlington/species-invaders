@@ -35,7 +35,7 @@ class location extends jsonwrapper {
 			$db = DB::instance();
 			$query = 'INSERT INTO locations (name, polygon, date_added) VALUES (?, PolyFromText("POLYGON(('.$this->formatPolygon($polygon).'))"), NOW())';
 			$db->query($query, 's', array($name));
-		} catch (Exception $e) {
+		} catch (MysqliQueryExecutionException $e) {
 			return FALSE;
 		}
 		return TRUE;
@@ -47,7 +47,7 @@ class location extends jsonwrapper {
 			$db = DB::instance();
 			$query = 'UPDATE locations SET name=?, polygon=PolyFromText("POLYGON(('.$this->formatPolygon($polygon).'))") WHERE locationid=?';
 			$db->query($query, 's,i', array($name, $locationid));
-		} catch (Exception $e) {
+		} catch (MysqliQueryExecutionException $e) {
 			return FALSE;
 		}
 		return TRUE;

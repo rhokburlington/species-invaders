@@ -67,21 +67,47 @@ class species extends jsonwrapper {
 	
 	
 	public function insertNewSpecies($kingdom, $phylum, $class, $order, $family, $genus, $species, $extraNotes) {
-		$db = DB::instance();
-		$query = 'INSERT INTO species (kingdom, phylum, class, order, family, genus, species, extra_notes, date_added VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())';
-		$db->query($query, 's,s,s,s,s,s,s', array($kingdom, $phylum, $class, $order, $family, $genus, $species, $extraNotes));
+		try {
+			$db = DB::instance();
+			$query = 'INSERT INTO species (kingdom, phylum, class, order, family, genus, species, extra_notes, date_added VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())';
+			$db->query($query, 's,s,s,s,s,s,s', array($kingdom, $phylum, $class, $order, $family, $genus, $species, $extraNotes));
+		} catch (MysqliQueryExecutionException $e) {
+			return FALSE;
+		}
+		return TRUE;
 	}
 	
 	public function associateSpeciesWithInvadingLocation($speciesid, $locationid) {
-		$db = DB::instance();
-		$query = 'INSERT INTO `species-invadinglocations` (speciesid, invading_location) VALUES (?, ?)';
-		$db->query($query, 'i,i', array($speciesid, $locationid));
+		try {
+			$db = DB::instance();
+			$query = 'INSERT INTO `species-invadinglocations` (speciesid, invading_location) VALUES (?, ?)';
+			$db->query($query, 'i,i', array($speciesid, $locationid));
+		} catch (MysqliQueryExecutionException $e) {
+			return FALSE;
+		}
+		return TRUE;
 	}
 	
 	public function associateSpeciesWithNativeLocation($speciesid, $locationid) {
-		$db = DB::instance();
-		$query = 'INSERT INTO `species-nativelocations` (speciesid, native_location) VALUES (?, ?)';
-		$db->query($query, 'i,i', array($speciesid, $locationid));
+		try {
+			$db = DB::instance();
+			$query = 'INSERT INTO `species-nativelocations` (speciesid, native_location) VALUES (?, ?)';
+			$db->query($query, 'i,i', array($speciesid, $locationid));
+		} catch (MysqliQueryExecutionException $e) {
+			return FALSE;
+		}
+		return TRUE;
+	}
+	
+	public function addCommonName($speciesid, $commonName) {
+		try {
+			$db = DB::instance();
+			$query = 'INSERT INTO `common-names` (speciesid, common_name) VALUES (?, ?)';
+			$db->query($query, 'i,s', array($speciesid, $commonName));
+		} catch (MysqliQueryExecutionException $e) {
+			return FALSE;
+		}
+		return TRUE;
 	}
 	
 }

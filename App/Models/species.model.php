@@ -74,7 +74,7 @@ class species extends jsonwrapper {
 	
 	public function associateSpeciesWithInvadingLocation($speciesid, $locationid) {
 		$db = DB::instance();
-		$query = 'INSERT INTO `species-invadinglocations` (speciesid, locationid) VALUES (?, ?)';
+		$query = 'INSERT INTO `species-invadinglocations` (speciesid, invading_location) VALUES (?, ?)';
 		$db->query($query, 'i,i', array($speciesid, $locationid));
 	}
 	

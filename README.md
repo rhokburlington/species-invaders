@@ -53,9 +53,9 @@ Fetch data via GET & create/update data via POST. Querying specific data from an
 - /activity (add a new activity; parameters: 'name' [required], 'extra_info' [optional])**
   - /activity/id (update/remove an activity by id; parameters: 'activityid' [required], 'name' [required], 'extra_info' [optional])**
 
-* - Completed
-** - Unimplemented or Incomplete
-† - 'add/associate' support only.
+<sup>\*</sup> - Completed
+<sup>**</sup> - Unimplemented or Incomplete
+<sup>†</sup> - 'add/associate' support only.
 
 IMPLEMENTATION CONSIDERATIONS
 -----------------------------
